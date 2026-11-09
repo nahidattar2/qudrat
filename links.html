@@ -11,6 +11,8 @@ h2{margin:0;font-size:1.3rem}.sub{color:var(--mut);margin:2px 0 12px}
 .b{flex:1;min-width:200px;text-align:center;text-decoration:none;font-weight:800;font-size:1.1rem;padding:16px;border-radius:14px;background:var(--pri2);color:var(--pri);border:2px solid var(--pri)}
 .b.pri{background:var(--pri);color:#fff}
 .cp{margin-top:10px;width:100%;font:inherit;font-weight:800;font-size:1.05rem;padding:12px;border-radius:12px;border:2px solid var(--pri);background:#fff;color:var(--pri);cursor:pointer}.cp.ok{background:var(--pri);color:#fff}
+.ins{margin-top:10px;width:100%;font:inherit;font-weight:800;font-size:1.05rem;padding:12px;border-radius:12px;border:0;background:linear-gradient(135deg,#2e1a5e,#6a3fc4);color:#fff;cursor:pointer}
+#ov.big{padding:8px;background:#f6f2fb}#ov.big h3{display:none}#ov.big #ovq img{width:min(98vw,calc((100vh - 90px)*16/9))!important;height:auto!important;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15)}
 .qb{margin-top:10px;width:100%;font:inherit;font-weight:700;padding:10px;border-radius:12px;border:2px dashed var(--bd);background:transparent;color:var(--tx);cursor:pointer;display:none}
 .sheet{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;background:linear-gradient(135deg,#2e1a5e,#6a3fc4);color:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 4px 14px rgba(91,47,176,.25)}.sheet span{font-weight:800;font-size:1.3rem}.sheet small{opacity:.9}
 .logo{background:#fff;border-radius:16px;padding:12px 18px;margin:0 auto 16px;max-width:340px;border:1px solid var(--bd)}.logo img{display:block;width:100%;height:auto}
@@ -29,6 +31,7 @@ h1,.tch{text-align:center}
     <a class="b pri" href="https://nahidattar2.github.io/qudrat/qudrat-1.html" target="_blank">📝 رابط الطالبات</a>
     <a class="b" href="https://nahidattar2.github.io/qudrat/qudrat-1-board.html" target="_blank">🏆 البورد (للسبورة)</a>
   </div>
+  <button class="ins">📋 عرض تعليمات الاختبار</button>
   <button class="cp" data-u="https://nahidattar2.github.io/qudrat/qudrat-1.html">📋 نسخ رابط الطالبات</button>
   <button class="qb" data-u="https://nahidattar2.github.io/qudrat/qudrat-1.html" data-t="اختبار القدرات الكمي ١ — الهندسة">عرض رمز QR للطالبات</button>
   <div class="url" dir="ltr">https://nahidattar2.github.io/qudrat/qudrat-1.html</div>
@@ -48,7 +51,7 @@ if(window.QRCode){
   document.querySelectorAll(".qb").forEach(function(b){b.style.display="block";b.onclick=function(){
     var q=document.getElementById("ovq");q.innerHTML="";
     new QRCode(q,{text:b.getAttribute("data-u"),width:512,height:512,correctLevel:QRCode.CorrectLevel.M});
-    document.getElementById("ovt").textContent="امسحي الرمز: "+b.getAttribute("data-t");
+    document.getElementById("ovt").textContent="امسحي الرمز: "+b.getAttribute("data-t");document.getElementById("ov").classList.remove("big");
     document.getElementById("ov").style.display="flex";}});
 }
 document.querySelectorAll(".cp").forEach(function(b){b.onclick=function(){
@@ -57,5 +60,9 @@ document.querySelectorAll(".cp").forEach(function(b){b.onclick=function(){
   function fb(){var t=document.createElement("textarea");t.value=u;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.focus();t.select();try{document.execCommand("copy");ok()}catch(e){prompt("انسخي الرابط:",u)}t.remove()}
   if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(u).then(ok,fb)}else fb();
 }});
-document.getElementById("ovx").onclick=function(){document.getElementById("ov").style.display="none"};
+document.querySelectorAll(".ins").forEach(function(b){b.onclick=function(){
+  var o=document.getElementById("ov");document.getElementById("ovq").innerHTML='<img src="instructions.png" alt="تعليمات الاختبار">';
+  o.classList.add("big");o.style.display="flex";
+  try{var d=document.documentElement;(d.requestFullscreen||d.webkitRequestFullscreen).call(d)}catch(e){}}});
+document.getElementById("ovx").onclick=function(){var o=document.getElementById("ov");o.style.display="none";o.classList.remove("big");try{if(document.fullscreenElement||document.webkitFullscreenElement)(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}};
 </script></body></html>
