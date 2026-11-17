@@ -66,7 +66,7 @@ button:disabled{opacity:.4;cursor:default}
   <h1>اختبار القدرات الكمي ١</h1>
   <p class="sub">القدرات الكمية | الهندسة</p>
   <p class="sub">معلمة الرياضيات: ناهد عطار</p>
-  <div class="stats"><div><b>١٠</b>أسئلة</div><div><b>١٠</b>دقائق</div></div>
+  <div class="stats"><div><b>١٠</b>أسئلة</div><div><b>٢٠</b>دقيقة</div></div>
   <label for="nm">اسم الطالبة</label><input id="nm" autocomplete="off">
   <label>الفصل</label><div class="cls" id="clw"><button type="button" data-c="1">١</button><button type="button" data-c="2">٢</button><button type="button" data-c="3">٣</button></div><input id="cl" type="hidden">
   <button class="full" id="go">ابدئي الاختبار</button>
@@ -77,7 +77,7 @@ button:disabled{opacity:.4;cursor:default}
 
 <div id="s1" class="hide">
   <div class="card">
-    <div class="top"><span id="cnt"></span><span class="timer" id="tm">06:00</span></div>
+    <div class="top"><span id="cnt"></span><span class="timer" id="tm">20:00</span></div>
     <div class="bar"><i id="pg"></i></div>
     <span class="tag" id="tg"></span>
     <p class="q" id="qt"></p>
@@ -155,7 +155,7 @@ var Q=[
  o:CMPO,a:3,
  e:'الأبعاد قد تكون '+L('6 × 4')+' فالمحيط '+L('20')+'، أو '+L('8 × 3')+' فالمحيط '+L('22')+'، أو '+L('12 × 2')+' فالمحيط '+L('28')+'. المحيط غير محدد، إذن المعطيات غير كافية.'}
 ];
-var N=Q.length,T=600,MAXX=2;
+var N=Q.length,T=1200,MAXX=2;
 var Q0=Q;
 var t0=0,ans=[],cur=0,left=T,iv=null,done=false,KEY="qudrat1-state",ORD=null,OPT=null,exits=0,lastX=0,why="";
 function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
