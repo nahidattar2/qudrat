@@ -193,8 +193,8 @@ function leave(){
 }
 function warn(t,m){$("wxt").textContent=t;$("wxm").textContent=m;$("wx").className="on"}
 $("wxb").onclick=function(){$("wx").className="";if(fsOK()&&!isFs())reqFs()};
-document.addEventListener("visibilitychange",function(){if(document.hidden)leave()});
-window.addEventListener("blur",function(){setTimeout(function(){if(!document.hasFocus())leave()},300)});
+document.addEventListener("visibilitychange",function(){if(document.hidden){if(gT){clearTimeout(gT);gT=null}leave()}});
+var gT=null,GR=10;function gClr(){if(gT){clearTimeout(gT);gT=null;$("wx").className=""}}window.addEventListener("blur",function(){setTimeout(function(){if(document.hasFocus()||!running()||document.hidden||gT)return;warn("↩️ ارجعي إلى الاختبار","فُتحت نافذة أخرى فوق الاختبار. اضغطي على صفحة الاختبار خلال "+GR+" ثوانٍ، وإلا يُحسب خروجًا.");gT=setTimeout(function(){gT=null;if(!document.hasFocus())leave()},GR*1000)},300)});window.addEventListener("focus",gClr);
 function onFs(){if(!isFs()&&running()&&fsOK())leave()}
 document.addEventListener("fullscreenchange",onFs);document.addEventListener("webkitfullscreenchange",onFs);
 /* منع النسخ */
