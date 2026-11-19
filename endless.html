@@ -122,7 +122,7 @@ let ST={name:"",cls:"",dom:"الكل"},S={ok:0,n:0,str:0},cur=null,hintUsed=fals
 try{Object.assign(ST,JSON.parse(localStorage.getItem("qend")||"{}"))}catch(e){}
 const app=document.getElementById("app");
 function start(){
-  app.innerHTML=`<div class="card"><label>اسم الطالبة (الثلاثي)</label><input id="nm" value="${ST.name.replace(/"/g,"")}" placeholder="اكتبي اسمك كما في كشف الفصل">
+  app.innerHTML=`<div class="card"><label>اسم الطالبة الثلاثي (باللغة العربية)</label><input id="nm" value="${ST.name.replace(/"/g,"")}" placeholder="بالحروف العربية كما في كشف الفصل">
   <label>الفصل</label><div class="chips" id="cl">${[1,2,3].map(c=>`<button class="chip ${ST.cls==="أولى "+AR(c)?"on":""}" data-v="أولى ${AR(c)}">أولى ${AR(c)}</button>`).join("")}</div>
   <label>المجال</label><div class="chips" id="dm">${DOMS.map(d=>`<button class="chip ${ST.dom===d?"on":""}" data-v="${d}">${d}</button>`).join("")}</div>
   <button class="go" id="go">ابدئي التدريب 🚀</button><div class="err" id="er"></div></div>`;
@@ -154,4 +154,8 @@ function answer(b){const ok=b.textContent===cur.A;S.n++;if(ok){S.ok++;S.str++}el
   try{fetch(SAVE,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({tab:TAB,row:{"اسم الطالبة":ST.name,"الفصل":ST.cls,"المجال":cur.d,"المهارة":cur.s,"النتيجة":ok?"صحيحة":"خاطئة","استخدمت التلميح":hintUsed?"نعم":"لا"}})})}catch(e){}
 }
 start();
-</script></body></html>
+</script><script>/* الاسم بالعربية فقط */(function(){function bad(v){v=(v||"").trim();return v&&(/[A-Za-z]/.test(v)||!/[\u0600-\u06FF]/.test(v))}
+function msg(i,show){var m=document.getElementById("arnm");if(!m){m=document.createElement("div");m.id="arnm";m.style.cssText="color:#c62828;font-weight:700;font-size:.92rem;margin:6px 0 2px";m.textContent="⚠️ اكتبي اسمك باللغة العربية فقط (بدون حروف إنجليزية).";i.insertAdjacentElement("afterend",m)}m.style.display=show?"block":"none"}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("#go");var i=document.getElementById("nm");if(!b||!i||i.type==="hidden")return;
+if(bad(i.value)){e.preventDefault();e.stopImmediatePropagation();msg(i,true);i.focus()}else msg(i,false)},true);
+document.addEventListener("input",function(e){if(e.target&&e.target.id==="nm"&&!bad(e.target.value))msg(e.target,false)},true)})();</script></body></html>

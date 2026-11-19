@@ -67,7 +67,7 @@ button:disabled{opacity:.4;cursor:default}
   <p class="sub">القدرات الكمية | الهندسة</p>
   <p class="sub">معلمة الرياضيات: ناهد عطار</p>
   <div class="stats"><div><b>١٠</b>أسئلة</div><div><b>٢٠</b>دقيقة</div></div>
-  <label for="nm">اسم الطالبة</label><input id="nm" autocomplete="off">
+  <label for="nm">اسم الطالبة (باللغة العربية)</label><input id="nm" autocomplete="off" placeholder="اكتبي اسمك الثلاثي بالحروف العربية">
   <label>الفصل</label><div class="cls" id="clw"><button type="button" data-c="1">١</button><button type="button" data-c="2">٢</button><button type="button" data-c="3">٣</button></div><input id="cl" type="hidden">
   <button class="full" id="go">ابدئي الاختبار</button>
   <p class="sent" id="msg" style="color:var(--bad);font-weight:700"></p>
@@ -291,5 +291,9 @@ $("ops").onclick=function(e){
 $("pv").onclick=function(){if(cur>0){cur--;save("run");render()}};
 $("nx").onclick=function(){if(cur<N-1){cur++;save("run");render()}else finish(false)};
 </script>
-</body>
+<script>/* الاسم بالعربية فقط */(function(){function bad(v){v=(v||"").trim();return v&&(/[A-Za-z]/.test(v)||!/[\u0600-\u06FF]/.test(v))}
+function msg(i,show){var m=document.getElementById("arnm");if(!m){m=document.createElement("div");m.id="arnm";m.style.cssText="color:#c62828;font-weight:700;font-size:.92rem;margin:6px 0 2px";m.textContent="⚠️ اكتبي اسمك باللغة العربية فقط (بدون حروف إنجليزية).";i.insertAdjacentElement("afterend",m)}m.style.display=show?"block":"none"}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("#go");var i=document.getElementById("nm");if(!b||!i||i.type==="hidden")return;
+if(bad(i.value)){e.preventDefault();e.stopImmediatePropagation();msg(i,true);i.focus()}else msg(i,false)},true);
+document.addEventListener("input",function(e){if(e.target&&e.target.id==="nm"&&!bad(e.target.value))msg(e.target,false)},true)})();</script></body>
 </html>
