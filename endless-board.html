@@ -58,7 +58,7 @@ let CLS="1",ROWS=null;
 document.getElementById("gl").textContent=AR(GOAL);
 function unlock(){if(document.getElementById("pin").value===PIN){try{sessionStorage.setItem("qpin","1")}catch(e){}document.getElementById("lock").remove();load()}else document.getElementById("er").textContent="الرقم السري غير صحيح"}
 document.getElementById("pin").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
-try{if(sessionStorage.getItem("qpin")==="1"){document.getElementById("lock").remove();setTimeout(load)}}catch(e){}
+try{if(sessionStorage.getItem("qpin")==="1"||/nahidattar2\.github\.io\/11\/links\.html/.test(document.referrer)){document.getElementById("lock").remove();setTimeout(load)}}catch(e){}
 function load(){const cb="cb"+Math.random().toString(36).slice(2),s=document.createElement("script");
   const to=setTimeout(()=>{delete window[cb];s.remove();document.getElementById("app").innerHTML='<div class="empty">تعذّر تحميل النتائج — اضغطي «تحديث».</div>'},15000);
   window[cb]=d=>{clearTimeout(to);delete window[cb];s.remove();ROWS=d.rows||[];build()};
